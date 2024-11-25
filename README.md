@@ -1,7 +1,4 @@
-
 <a id="readme-top"></a>
-
-
 
 <!-- PROJECT LOGO -->
 <br />
@@ -9,8 +6,6 @@
 
 <h3 align="center">Mission 2</h3>
 </div>
-
-
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -32,42 +27,34 @@
   </ol>
 </details>
 
-
-
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
 
-You will be working on the backend and apply an Agile practice of Test-Driven Development (TDD).  As part of the project, there are 3 RESTful APIs that are required as part of the insurance purchasing process
-
-
+You will be working on the backend and apply an Agile practice of Test-Driven Development (TDD). As part of the project, there are 3 RESTful APIs that are required as part of the insurance purchasing process
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
 ### Built With
-
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
+
 ## Getting Started
-
-
 
 ### Prerequisites
 
-- `express` - A web application framework for Node.js.
-- `jest` - A Test framework for Unit Tests.
+-   `express` - A web application framework for Node.js.
+-   `jest` - A Test framework for Unit Tests.
+-   `supertest` - A test framework for backend API test.
+-   `prettier eslint` - Linter and formatter.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Usage
 
-
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->

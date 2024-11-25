@@ -1,4 +1,8 @@
-test ('TODO - empty test', () => {
+const request = require('supertest');
+const app = require('../server');
 
-    expect(1).toBe(1);
-})
+test('TODO - empty api test', async () => {
+    const response = await request(app).get('/api/quote');
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual('test');
+});
