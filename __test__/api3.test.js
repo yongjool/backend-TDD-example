@@ -33,23 +33,132 @@ const runTestHelper = async (input, expectedStatus, expectedOutput) => {
 
 describe('Quote API', () => {
     //for logic test with valid input
-    test.todo('valid car value and high risk rating');
-    test.todo('valid car value and low risk rating');
-    test.todo('valid car value and middle risk rating');
+    test('valid car value and high risk rating', async () => {
+        const input = { car_value: 6614, risk_rating: 5 };
+        const expectedOutput = {
+            monthly_premium: 27.5,
+            yearly_premium: 330,
+        };
+        const expectedStatus = STATUS_OK;
+
+        await runTestHelper(input, expectedStatus, expectedOutput);
+    });
+
+    test('valid car value and low risk rating', async () => {
+        const input = { car_value: 6614, risk_rating: 1 };
+        const expectedOutput = {
+            monthly_premium: 66,
+            yearly_premium: 5.5,
+        };
+        const expectedStatus = STATUS_OK;
+
+        await runTestHelper(input, expectedStatus, expectedOutput);
+    });
+    test('valid car value and middle risk rating', async () => {
+        const input = { car_value: 6614, risk_rating: 3 };
+        const expectedOutput = {
+            monthly_premium: 198,
+            yearly_premium: 16.5,
+        };
+        const expectedStatus = STATUS_OK;
+
+        await runTestHelper(input, expectedStatus, expectedOutput);
+    });
 
     //invalid test
-    test.todo('invalid car value - negative');
-    test.todo('invalid risk rating - too high');
-    test.todo('invalid risk rating - too low');
+    test('invalid car value - negative', async () => {
+        const input = { car_value: -6614, risk_rating: 3 };
+        const expectedOutput = {
+            error: 'Invalid car value',
+        };
+        const expectedStatus = STATUS_BAD_REQUEST;
 
-    test.todo('missing car value');
-    test.todo('missing risk rating');
-    test.todo('missing car value and risk rating');
+        await runTestHelper(input, expectedStatus, expectedOutput);
+    });
+    test('invalid risk rating - too high', async () => {
+        const input = { car_value: 6614, risk_rating: 6 };
+        const expectedOutput = {
+            error: 'Invalid risk_rating',
+        };
+        const expectedStatus = STATUS_BAD_REQUEST;
+
+        await runTestHelper(input, expectedStatus, expectedOutput);
+    });
+    test('invalid risk rating - too low', async () => {
+        const input = { car_value: 6614, risk_rating: 0 };
+        const expectedOutput = {
+            error: 'Invalid risk_rating',
+        };
+        const expectedStatus = STATUS_BAD_REQUEST;
+
+        await runTestHelper(input, expectedStatus, expectedOutput);
+    });
+
+    test('missing car value', async () => {
+        const input = { risk_rating: 3 };
+        const expectedOutput = {
+            error: 'Invalid car value',
+        };
+        const expectedStatus = STATUS_BAD_REQUEST;
+
+        await runTestHelper(input, expectedStatus, expectedOutput);
+    });
+    test('missing risk rating', async () => {
+        const input = { car_value: 6614 };
+        const expectedOutput = {
+            error: 'Invalid risk_rating',
+        };
+        const expectedStatus = STATUS_BAD_REQUEST;
+
+        await runTestHelper(input, expectedStatus, expectedOutput);
+    });
+    test('missing car value and risk rating', async () => {
+        const input = {};
+        const expectedOutput = {
+            error: 'Invalid car value',
+        };
+        const expectedStatus = STATUS_BAD_REQUEST;
+
+        await runTestHelper(input, expectedStatus, expectedOutput);
+    });
 
     //edge test
-    test.todo('invalid car value format');
-    test.todo('invalid risk rating - format');
+    test('invalid car value format', async () => {
+        const input = { car_value: 'asdlf#@$(%*()', risk_rating: 3 };
+        const expectedOutput = {
+            error: 'Invalid car value',
+        };
+        const expectedStatus = STATUS_BAD_REQUEST;
 
-    test.todo('valid car value - extreme low'); //minimum value = > 1886 + 1  = 1887
-    test.todo('valid car value - extreme high');
+        await runTestHelper(input, expectedStatus, expectedOutput);
+    });
+    test('invalid risk rating - format', async () => {
+        const input = { car_value: 6614, risk_rating: '/three?' };
+        const expectedOutput = {
+            error: 'Invalid risk_rating',
+        };
+        const expectedStatus = STATUS_BAD_REQUEST;
+
+        await runTestHelper(input, expectedStatus, expectedOutput);
+    });
+
+    test('valid car value - extreme low', async () => {
+        //minimum value = > 1886 + 1  = 1887
+        const input = { car_value: 10, risk_rating: 3 };
+        const expectedOutput = {
+            error: 'Invalid car value',
+        };
+        const expectedStatus = STATUS_BAD_REQUEST;
+
+        await runTestHelper(input, expectedStatus, expectedOutput);
+    });
+    test('valid car value - extreme high', async () => {
+        const input = { car_value: 1000000, risk_rating: 3 };
+        const expectedOutput = {
+            error: 'Invalid car value',
+        };
+        const expectedStatus = STATUS_BAD_REQUEST;
+
+        await runTestHelper(input, expectedStatus, expectedOutput);
+    });
 });
