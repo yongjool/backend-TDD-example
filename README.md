@@ -57,6 +57,8 @@ You will be working on the backend and apply an Agile practice of Test-Driven De
 
 ### Prerequisites
 
+- `express` - A web application framework for Node.js.
+- `jest` - A Test framework for Unit Tests.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
