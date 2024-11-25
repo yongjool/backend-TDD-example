@@ -162,5 +162,13 @@ describe('Quote API', () => {
         await runTestHelper(input, expectedStatus, expectedOutput);
     });
 
-    test.todo('invalid input');
+    test('invalid input', async () => {
+        const input = { value: 6614, rating: 3 };
+        const expectedOutput = {
+            error: 'Invalid car value',
+        };
+        const expectedStatus = STATUS_BAD_REQUEST;
+
+        await runTestHelper(input, expectedStatus, expectedOutput);
+    });
 });
