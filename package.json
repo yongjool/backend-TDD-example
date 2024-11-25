@@ -4,17 +4,21 @@
   "description": "Mission 2",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
-    "test": "jest --watchALL --verbose"
+
+    "test": "jest",
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.21.1",
-    "jest": "^29.7.0"
+
+    "express": "^4.21.1"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.14"
+    "jest": "^29.7.0"
+
   }
 }
