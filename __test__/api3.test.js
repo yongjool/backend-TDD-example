@@ -69,7 +69,7 @@ describe('Quote API', () => {
     test('invalid car value - negative', async () => {
         const input = { car_value: -6614, risk_rating: 3 };
         const expectedOutput = {
-            error: 'Invalid car value',
+            error: 'Invalid car value - car value cannot be negative',
         };
         const expectedStatus = STATUS_BAD_REQUEST;
 
@@ -78,7 +78,7 @@ describe('Quote API', () => {
     test('invalid risk rating - too high', async () => {
         const input = { car_value: 6614, risk_rating: 6 };
         const expectedOutput = {
-            error: 'Invalid risk_rating',
+            error: 'Invalid risk_rating - maximum risk rating is 5',
         };
         const expectedStatus = STATUS_BAD_REQUEST;
 
@@ -87,7 +87,7 @@ describe('Quote API', () => {
     test('invalid risk rating - too low', async () => {
         const input = { car_value: 6614, risk_rating: 0 };
         const expectedOutput = {
-            error: 'Invalid risk_rating',
+            error: 'Invalid risk_rating - minimum risk rating is 1',
         };
         const expectedStatus = STATUS_BAD_REQUEST;
 
@@ -97,7 +97,7 @@ describe('Quote API', () => {
     test('missing car value', async () => {
         const input = { risk_rating: 3 };
         const expectedOutput = {
-            error: 'Invalid car value',
+            error: 'Invalid car value - car value info is missing',
         };
         const expectedStatus = STATUS_BAD_REQUEST;
 
@@ -106,7 +106,7 @@ describe('Quote API', () => {
     test('missing risk rating', async () => {
         const input = { car_value: 6614 };
         const expectedOutput = {
-            error: 'Invalid risk_rating',
+            error: 'Invalid risk_rating - risk rating info is missing',
         };
         const expectedStatus = STATUS_BAD_REQUEST;
 
@@ -115,7 +115,7 @@ describe('Quote API', () => {
     test('missing car value and risk rating', async () => {
         const input = {};
         const expectedOutput = {
-            error: 'Invalid car value',
+            error: 'Invalid car value - car value info is missing',
         };
         const expectedStatus = STATUS_BAD_REQUEST;
 
@@ -126,7 +126,7 @@ describe('Quote API', () => {
     test('invalid car value format', async () => {
         const input = { car_value: 'asdlf#@$(%*()', risk_rating: 3 };
         const expectedOutput = {
-            error: 'Invalid car value',
+            error: 'Invalid car value - cannot recognize car value',
         };
         const expectedStatus = STATUS_BAD_REQUEST;
 
@@ -135,7 +135,7 @@ describe('Quote API', () => {
     test('invalid risk rating - format', async () => {
         const input = { car_value: 6614, risk_rating: '/three?' };
         const expectedOutput = {
-            error: 'Invalid risk_rating',
+            error: 'Invalid risk_rating - cannot recognize risk rating',
         };
         const expectedStatus = STATUS_BAD_REQUEST;
 
@@ -146,7 +146,7 @@ describe('Quote API', () => {
         //minimum value = > 1886 + 1  = 1887
         const input = { car_value: 10, risk_rating: 3 };
         const expectedOutput = {
-            error: 'Invalid car value',
+            error: 'Invalid car value - minimum car value is 1887',
         };
         const expectedStatus = STATUS_BAD_REQUEST;
 
@@ -155,7 +155,7 @@ describe('Quote API', () => {
     test('valid car value - extreme high', async () => {
         const input = { car_value: 1000000, risk_rating: 3 };
         const expectedOutput = {
-            error: 'Invalid car value',
+            error: 'Invalid car value - car value cannot be bigger than 1000000',
         };
         const expectedStatus = STATUS_BAD_REQUEST;
 
@@ -165,7 +165,7 @@ describe('Quote API', () => {
     test('invalid input', async () => {
         const input = { value: 6614, rating: 3 };
         const expectedOutput = {
-            error: 'Invalid car value',
+            error: 'Invalid car value - car value info is missing',
         };
         const expectedStatus = STATUS_BAD_REQUEST;
 
