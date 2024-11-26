@@ -1,11 +1,15 @@
 const express = require('express');
 
+//APIs
+const quoteRoutes = require('./routes/quote.routes');
+
 const app = express();
 
-app.get('/api/quote', (req, res) => {
-    console.log('GET / endpoint was hit 🎯');
-    res.json('test');
-});
+// Middleware
+app.use(express.json());
+
+// Routes
+app.use('/api', quoteRoutes);
 
 // Export the app (for testing)
 module.exports = app;
