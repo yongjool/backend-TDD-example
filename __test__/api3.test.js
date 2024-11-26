@@ -69,7 +69,7 @@ describe('Quote API', () => {
     test('invalid car value - negative', async () => {
         const input = { car_value: -6614, risk_rating: 3 };
         const expectedOutput = {
-            error: 'Invalid car value - car value cannot be negative',
+            error: 'Invalid car value - minimum car value is 1887',
         };
         const expectedStatus = STATUS_BAD_REQUEST;
 
