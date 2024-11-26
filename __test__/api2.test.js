@@ -1,5 +1,7 @@
-// api2.test.js
-const { calculateRiskRating } = require('./api2'); // Import your API function
+// __test__/api2.test.js
+const request = require('supertest');
+const app = require('../server2');
+const { calculateRiskRating } = require('../api2');
 
 describe('API 2: Convert Claim History to Risk Rating', () => {
     test('Valid input with two keywords', () => {
