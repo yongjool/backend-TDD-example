@@ -47,8 +47,8 @@ describe('Quote API', () => {
     test('valid car value and low risk rating', async () => {
         const input = { car_value: 6614, risk_rating: 1 };
         const expectedOutput = {
-            monthly_premium: 66,
-            yearly_premium: 5.5,
+            monthly_premium: 5.5,
+            yearly_premium: 66,
         };
         const expectedStatus = STATUS_OK;
 
@@ -57,8 +57,8 @@ describe('Quote API', () => {
     test('valid car value and middle risk rating', async () => {
         const input = { car_value: 6614, risk_rating: 3 };
         const expectedOutput = {
-            monthly_premium: 198,
-            yearly_premium: 16.5,
+            monthly_premium: 16.5,
+            yearly_premium: 198,
         };
         const expectedStatus = STATUS_OK;
 
