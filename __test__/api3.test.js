@@ -126,7 +126,7 @@ describe('Quote API', () => {
     test('invalid car value format', async () => {
         const input = { car_value: 'asdlf#@$(%*()', risk_rating: 3 };
         const expectedOutput = {
-            error: 'Invalid car value - cannot recognize car value',
+            error: 'Invalid car value - car value info is missing',
         };
         const expectedStatus = STATUS_BAD_REQUEST;
 
@@ -135,7 +135,7 @@ describe('Quote API', () => {
     test('invalid risk rating - format', async () => {
         const input = { car_value: 6614, risk_rating: '/three?' };
         const expectedOutput = {
-            error: 'Invalid risk_rating - cannot recognize risk rating',
+            error: 'Invalid risk_rating - risk rating info is missing',
         };
         const expectedStatus = STATUS_BAD_REQUEST;
 
