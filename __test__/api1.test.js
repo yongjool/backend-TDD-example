@@ -1,8 +1,10 @@
-const request = require('supertest');
-const app = require('../server');
+const request = require('supertest'); //library for testing HTTP requests
+const app = require('../server'); //import the server for testing, alows testing without having to start the server
 
 describe('API 1: Car Value Calculation', () => {
+    //describe is a jest function that groups tests, for organization and readability
     it('Should calculate car value for valid inputs (Sunny day scenario)', async () => {
+        //it() defines an individual test case with two arguments: a string explaining what the test should do, and a function that performs the test
         const response = await request(app)
             .post('/api/car-value')
             .send({ model: 'Civic', year: 2014 });
