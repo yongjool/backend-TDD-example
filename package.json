@@ -4,17 +4,14 @@
   "description": "Mission 2",
   "main": "index.js",
   "scripts": {
-
     "test": "jest",
     "dev": "nodemon server.js",
     "start": "node server.js"
-
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-
     "express": "^4.21.1"
   },
   "devDependencies": {
