@@ -1,5 +1,3 @@
-// controllers/carValueController.js
-
 const calculateCarValue = (req, res) => {
     const { model, year } = req.query; // Read from query parameters
 
