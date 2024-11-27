@@ -2,7 +2,8 @@ const express = require('express'); // Import Express for building the server
 
 // APIs
 const quoteRoutes = require('./routes/quote.routes'); // Import Quote API routes
-const riskRoutes = require('./routes/risk.routes');  // Import Risk Rating API routes
+const riskRoutes = require('./routes/risk.routes'); // Import Risk Rating API routes
+const carValueRoutes = require('./routes/carValue.routes');
 
 const app = express(); // Initialize the Express app
 
@@ -12,6 +13,7 @@ app.use(express.json()); // Parse incoming JSON requests
 // Routes
 app.use('/api', quoteRoutes); // Mount Quote API routes at /api
 app.use('/api', riskRoutes); // Mount Risk Rating API routes at /api
+app.use('/api', carValueRoutes);
 
 // Export the app (for testing)
 module.exports = app;
