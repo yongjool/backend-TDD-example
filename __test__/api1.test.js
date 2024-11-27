@@ -48,4 +48,12 @@ describe('Car Value API', () => {
             expectedOutput: { error: 'Invalid model or year' },
         });
     });
+
+    test('Should return and error for negative year', async () => {
+        await runTestHelper({
+            input: { model: 'Outback', year: -987 },
+            expectedStatus: 400,
+            expectedOutput: { error: 'Invalid year' },
+        });
+    });
 });
