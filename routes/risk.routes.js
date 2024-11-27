@@ -2,6 +2,7 @@ const express = require('express');
 const { calculateRiskRatingController } = require('../controllers/risk.controller');
 const router = express.Router();
 
-router.post('/risk-rating', calculateRiskRatingController);
+// Use GET method to handle risk rating
+router.get('/risk-rating', calculateRiskRatingController);
 
 module.exports = router;

@@ -1,37 +1,34 @@
-// __test__/api2.test.js
 const request = require('supertest');
 const app = require('../server');
-const { calculateRiskRating } = require('../api2');
 
 describe('API 2: Convert Claim History to Risk Rating', () => {
-    test('Valid input with two keywords', () => {
-        const input = "A crash and a bump happened last year.";
-        const expectedOutput = { risk_rating: 2 };
-        expect(calculateRiskRating(input)).toEqual(expectedOutput);
+    test('Valid input with query parameter', async () => {
+        const response = await request(app).get('/api/risk-rating?claim_history=A%20crash%20and%20a%20bump%20happened%20last%20year.');
+        expect(response.status).toBe(200);
+        expect(response.body).toEqual({ risk_rating: 2 });
     });
 
-    test('Valid input with all keywords', () => {
-        const input = "Collide, smash, crash, scratch, bump!";
-        const expectedOutput = { risk_rating: 5 };
-        expect(calculateRiskRating(input)).toEqual(expectedOutput);
+    test('Missing claim_history parameter', async () => {
+        const response = await request(app).get('/api/risk-rating');
+        expect(response.status).toBe(400);
+        expect(response.body).toEqual({ error: 'claim_history is required' });
     });
 
-    test('Valid input with no keywords', () => {
-        const input = "No incidents reported.";
-        const expectedOutput = { risk_rating: 0 };
-        expect(calculateRiskRating(input)).toEqual(expectedOutput);
+    test('Valid input with all keywords', async () => {
+        const response = await request(app).get('/api/risk-rating?claim_history=Collide,%20smash,%20crash,%20scratch,%20bump!');
+        expect(response.status).toBe(200);
+        expect(response.body).toEqual({ risk_rating: 5 });
     });
 
-    test('Invalid input type (number)', () => {
-        const input = 12345;
-        const expectedOutput = { error: "there is an error" };
-        expect(calculateRiskRating(input)).toEqual(expectedOutput);
+    test('Valid input with no keywords', async () => {
+        const response = await request(app).get('/api/risk-rating?claim_history=No%20incidents%20reported.');
+        expect(response.status).toBe(200);
+        expect(response.body).toEqual({ risk_rating: 0 });
     });
 
-    test('Invalid input (empty string)', () => {
-        const input = "";
-        const expectedOutput = { error: "there is an error" };
-        expect(calculateRiskRating(input)).toEqual(expectedOutput);
+    test('Empty claim_history parameter', async () => {
+        const response = await request(app).get('/api/risk-rating?claim_history=');
+        expect(response.status).toBe(400);
+        expect(response.body).toEqual({ error: 'claim_history is required' });
     });
 });
-
