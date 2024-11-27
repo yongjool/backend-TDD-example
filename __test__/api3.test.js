@@ -25,7 +25,8 @@ const STATUS_OK = 200;
 const STATUS_BAD_REQUEST = 400;
 
 const runTestHelper = async (input, expectedStatus, expectedOutput) => {
-    const response = await request(app).get('/api/quote').send(input);
+    const queryString = new URLSearchParams(input).toString();
+    const response = await request(app).get(`/api/quote?${queryString}`);
 
     expect(response.status).toBe(expectedStatus);
     expect(response.body).toEqual(expectedOutput);

@@ -6,7 +6,12 @@ const MIN_RISK_RATING = 1;
 
 // Helper Functions for Validation
 const isValidNumber = (value) => {
-    return typeof value === 'number' && value !== null && value !== undefined;
+    return (
+        typeof value === 'number' &&
+        value !== null &&
+        value !== undefined &&
+        !isNaN(value)
+    );
 };
 
 const validateCarValue = (car_value) => {
@@ -37,22 +42,27 @@ const validateRiskRating = (risk_rating) => {
 
 // Quote Calculation Handler
 exports.quote = (req, res) => {
-    const { car_value, risk_rating } = req.body;
+    const { car_value, risk_rating } = req.query;
+
+    const car_valueNumber = Number(car_value);
+    const risk_ratingNumber = Number(risk_rating);
 
     // Validate inputs
-    const carValueError = validateCarValue(car_value);
+    const carValueError = validateCarValue(car_valueNumber);
     if (carValueError) {
         return res.status(400).json({ error: carValueError });
     }
 
-    const riskRatingError = validateRiskRating(risk_rating);
+    const riskRatingError = validateRiskRating(risk_ratingNumber);
     if (riskRatingError) {
         return res.status(400).json({ error: riskRatingError });
     }
 
     // Calculate premiums
-    const yearlyPremium = Math.floor((car_value * risk_rating) / 100);
-    const monthlyPremium = yearlyPremium / 12;
+    const yearlyPremium = Math.floor(
+        (car_valueNumber * risk_ratingNumber) / 100,
+    );
+    const monthlyPremium = parseFloat((yearlyPremium / 12).toFixed(2));
 
     // Send response
     res.json({
