@@ -1,6 +1,6 @@
 // __test__/api2.test.js
 const request = require('supertest');
-const app = require('../server2');
+const app = require('../server');
 const { calculateRiskRating } = require('../api2');
 
 describe('API 2: Convert Claim History to Risk Rating', () => {
@@ -34,3 +34,4 @@ describe('API 2: Convert Claim History to Risk Rating', () => {
         expect(calculateRiskRating(input)).toEqual(expectedOutput);
     });
 });
+

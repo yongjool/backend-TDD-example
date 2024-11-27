@@ -2,6 +2,7 @@ const express = require('express');
 
 //APIs
 const quoteRoutes = require('./routes/quote.routes');
+const riskRoutes = require('./routes/risk.routes');
 
 const app = express();
 
@@ -10,6 +11,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api', quoteRoutes);
+app.use('/api', riskRoutes);
 
 // Export the app (for testing)
 module.exports = app;

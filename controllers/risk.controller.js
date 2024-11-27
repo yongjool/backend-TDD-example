@@ -1,4 +1,4 @@
-const { calculateRiskRating } = require('../services/api2');
+const { calculateRiskRating } = require('../api2');
 
 const calculateRiskRatingController = (req, res) => {
     const { claim_history } = req.body;
