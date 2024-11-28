@@ -19,20 +19,23 @@ const runTestHelper = async ({ input, expectedStatus, expectedOutput }) => {
         queryParams.length > 0 ? '?' + queryParams.join('&') : '';
     const response = await request(app).get('/api/car-value' + queryString);
 
-    // Assertions
+    // Assertions, check if the response status and body match the expected values ive outlined in the tests
     expect(response.status).toBe(expectedStatus);
     expect(response.body).toEqual(expectedOutput);
 };
 
+// Describe block for the Car Value API tests. Describe function groups related tests together
 describe('Car Value API', () => {
+    //test for sunny day scenarios
     test('Should calculate car value for valid inputs (Sunny day scenario)', async () => {
         await runTestHelper({
-            input: { model: 'Civic', year: 2014 },
-            expectedStatus: 200,
-            expectedOutput: { car_value: 6614 },
+            input: { model: 'Civic', year: 2014 }, //example input to test
+            expectedStatus: 200, //what the expected response should be
+            expectedOutput: { car_value: 6614 }, //what the expected output should be
         });
     });
 
+    //test for models = numbers
     test('Should return an error for models with only numbers', async () => {
         await runTestHelper({
             input: { model: '911', year: 2020 },
@@ -41,6 +44,7 @@ describe('Car Value API', () => {
         });
     });
 
+    //test for year = letters
     test('Should return an error for invalid year type', async () => {
         await runTestHelper({
             input: { model: 'RAV4', year: 'twenty twenty' },
@@ -49,6 +53,7 @@ describe('Car Value API', () => {
         });
     });
 
+    //test for model with single character
     test('Should calculate car value for a single-character model', async () => {
         await runTestHelper({
             input: { model: 'A', year: 2018 },
@@ -57,6 +62,7 @@ describe('Car Value API', () => {
         });
     });
 
+    //test for null model and year
     test('Should return an error for null model and year', async () => {
         await runTestHelper({
             input: { model: null, year: null },
@@ -65,6 +71,7 @@ describe('Car Value API', () => {
         });
     });
 
+    //test for negative year
     test('Should return an error for negative year', async () => {
         await runTestHelper({
             input: { model: 'Outback', year: -987 },
@@ -73,6 +80,7 @@ describe('Car Value API', () => {
         });
     });
 
+    //test
     test('Should return an error for year past current date', async () => {
         await runTestHelper({
             input: { model: 'Corolla', year: 2029 },
@@ -81,6 +89,7 @@ describe('Car Value API', () => {
         });
     });
 
+    //test for invalid characters in year
     test('Should return an error for invalid characters in year', async () => {
         await runTestHelper({
             input: { model: 'Corolla', year: 20.2 },
@@ -89,6 +98,7 @@ describe('Car Value API', () => {
         });
     });
 
+    //test for model.length > 50
     test('Should return an error for too many characters in model', async () => {
         await runTestHelper({
             input: {
