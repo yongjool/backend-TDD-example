@@ -11,6 +11,10 @@ const calculateCarValue = (req, res) => {
         return res.status(400).json({ error: 'Invalid model' });
     }
 
+    if (model.length > 50) {
+        return res.status(400).json({ error: 'Model is too long' });
+    }
+
     // Convert year to a number (ensure it's an integer)
     const yearNumber = Number(year);
     const getCurrentYear = () => new Date().getFullYear();

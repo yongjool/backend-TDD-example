@@ -88,4 +88,15 @@ describe('Car Value API', () => {
             expectedOutput: { error: 'Invalid year' },
         });
     });
+
+    test('Should return an error for too many characters in model', async () => {
+        await runTestHelper({
+            input: {
+                model: 'hdfquyrhhfbvheqrbfuvyqrwbvhbefhbvqeiurybviuqhebfhivuqbhvqfbivubwhubfiuv',
+                year: 2014,
+            },
+            expectedStatus: 400,
+            expectedOutput: { error: 'Model is too long' },
+        });
+    });
 });
